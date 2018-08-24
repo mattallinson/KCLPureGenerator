@@ -15,7 +15,7 @@ def namecleaner(name):
 		if title in name.lower():
 			name = name.lower().replace(title, "")
 
-	return name.lower()
+	return name.lower() #returns it as lower bc I'm superstitious that this helps the KCLPure search
 	
 		
 
@@ -28,7 +28,7 @@ def main():
 		names = namefile.readlines()
 
 	for name in names:
-		clean_name = (namecleaner(name))
+		clean_name = (namecleaner(name)).title()
 		
 		with open(CLEANED_NAMEFILE,'a') as cleaned_namefile:
 			cleaned_namefile.write(clean_name)

@@ -22,7 +22,7 @@ class Researcher():
 		self.url = " "
 
 	def pure_search(self):
-		search_term = PURE_SEARCH_TERM + self.name
+		search_term = PURE_SEARCH_TERM + namecleaner(self.name)
 
 		res = requests.get(search_term)
 		soup = BeautifulSoup(res.text,'html.parser')
@@ -44,13 +44,13 @@ def main():
 	for count, name in enumerate(names,1): 
 		print(count,"/",len(names)) #makes the output show where we are
 		
-		name = namecleaner(name).rstrip() #use rstrip() to remove training newline
+		name = name.rstrip() #use rstrip() to remove training newline
 		
 		researcher = Researcher(name)
 		researcher.pure_search()
 		
 		with open("pure-profiles.txt","a") as output:
-			output.write(researcher.name + ", " + researcher.url + "\n")
+			output.write(researcher.name.title() + ", " + researcher.url + "\n")
 
 if __name__ == '__main__':
 	main()
